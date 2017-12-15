@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsl>
+    <def id="reload" desc="刷新内存" runOnce="true">
+        <call service="TestSampleService" />
+    </def>
+    <def id="getJson" desc="取json-dubbo接口" runOnce="false">
+        <call service="getJson" />
+    </def>
+
+    <def id="dsl4paramUpdate" desc="测试Date参数会在新标签中更新的问题" runOnce="false">
+        <set>
+            <innerParam>${input}</innerParam>
+        </set>
+    </def>
+</dsl>

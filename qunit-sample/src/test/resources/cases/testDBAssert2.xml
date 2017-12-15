@@ -1,0 +1,32 @@
+<testcase id="Test_DBAssert2" desc="自动化测试实例2">
+
+
+    <!-- 多文件测试 -->
+    <beforeSuit>
+        <set>
+            <dataMode></dataMode>
+        </set>
+    </beforeSuit>
+
+    <case id="test2-1" desc="调试case2-1" tag="zhy.li">
+        <!-- 表的内容无变动 -->
+        <sql database="dbAssertTest">
+            select count(*) from table1;
+        </sql>
+        <print/>
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 7;
+        </sql>
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+</testcase>

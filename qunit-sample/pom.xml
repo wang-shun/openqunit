@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <parent>
+        <artifactId>qunitopen</artifactId>
+        <groupId>com.qunar.base</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>qunit-sample</artifactId>
+    <packaging>jar</packaging>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>qunit-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 如果需要测试dubbo rpc接口，引入qunit-rpc包，注意版本号需要与qunit-core保持一致 -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>qunit-rpc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 引入dubbo服务的接口的依赖 -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>qunit-sample-dubbo-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 如果需要测试hessian协议接口，引入qunit-hessian包，注意版本号需要与qunit-core保持一致 -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>qunit-hessian</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>mysql-connector-java</artifactId>
+            <groupId>mysql</groupId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>qunit-sample</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

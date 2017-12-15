@@ -1,0 +1,19 @@
+<testcase id="Test_DateHolderTeardown" desc="自动化测试tesrdown">
+    <case id="Test_API" desc="自动化测试接口实例" tag="jialin">
+        <dataHolder>
+            <sql database="userdb">
+                select * from user;
+            </sql>
+        <!--    <teardown>
+                <call service="TestSampleService"/>
+            </teardown>-->
+        </dataHolder>
+      <!--  <sql database="Test">
+            select * from test;
+        </sql>-->
+      <!--  <teardown>
+            <call service="TestSampleService"/>
+        </teardown>-->
+    </case>
+
+</testcase>

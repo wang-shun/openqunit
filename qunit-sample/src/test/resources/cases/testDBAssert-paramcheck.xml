@@ -1,0 +1,22 @@
+<testcase id="testDBAssert-paramcheck" desc="自动化测试实例-paramcheck-case">
+
+
+    <case id="test1.1" desc="paramcheck-case1.1" tag="zhy.li">
+
+        <paramcheck include="a,b" value="[NULL],[EMPTY]">
+            <call service="service-test">
+                <param a="aaa" b="bbb" c="ccc"/>
+            </call>
+            <sql database="dbAssertTest">
+                update table2 set col2 = col2 + 2;
+            </sql>
+            <!-- 验证特定表 -->
+            <dbAssert>
+                <tables>dbAssertTest(table2)</tables>
+                <!--<ignore>table1(id);</ignore>-->
+                <orderBy>dbAssertTest(table2(id))</orderBy>
+            </dbAssert>
+        </paramcheck>
+    </case>
+
+</testcase>

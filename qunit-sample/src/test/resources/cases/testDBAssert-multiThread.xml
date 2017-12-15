@@ -1,0 +1,614 @@
+<testcase id="Test_DBAssert_multi-thread" desc="自动化测试实例-多线程">
+
+
+    <!-- 多文件测试 -->
+    <beforeSuit>
+        <set>
+            <dataMode></dataMode>
+        </set>
+    </beforeSuit>
+
+    <case id="test-mt-0" desc="调试case-mt-0" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+        <!-- 测试支持DB无差异 -->
+        <dbAssert/>
+    </case>
+    <case id="test-mt-1" desc="调试case-mt-1" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-2" desc="调试case-mt-2" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-3" desc="调试case-mt-3" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-4" desc="调试case-mt-4" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-5" desc="调试case-mt-5" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-6" desc="调试case-mt-6" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-7" desc="调试case-mt-7" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-8" desc="调试case-mt-8" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-9" desc="调试case-mt-9" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-10" desc="调试case-mt-10" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-11" desc="调试case-mt-11" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-12" desc="调试case-mt-12" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-13" desc="调试case-mt-13" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-14" desc="调试case-mt-14" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-15" desc="调试case-mt-15" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-16" desc="调试case-mt-16" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-17" desc="调试case-mt-17" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-18" desc="调试case-mt-18" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-19" desc="调试case-mt-19" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-20" desc="调试case-mt-20" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-21" desc="调试case-mt-21" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-22" desc="调试case-mt-22" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-23" desc="调试case-mt-23" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-24" desc="调试case-mt-24" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-25" desc="调试case-mt-25" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-26" desc="调试case-mt-26" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-27" desc="调试case-mt-27" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-28" desc="调试case-mt-28" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-29" desc="调试case-mt-29" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-30" desc="调试case-mt-30" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-31" desc="调试case-mt-31" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-32" desc="调试case-mt-32" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-33" desc="调试case-mt-33" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-34" desc="调试case-mt-34" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-35" desc="调试case-mt-35" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-36" desc="调试case-mt-36" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-37" desc="调试case-mt-37" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-38" desc="调试case-mt-38" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-39" desc="调试case-mt-39" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-40" desc="调试case-mt-40" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-41" desc="调试case-mt-41" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-42" desc="调试case-mt-42" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-43" desc="调试case-mt-43" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-44" desc="调试case-mt-44" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-45" desc="调试case-mt-45" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-46" desc="调试case-mt-46" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-47" desc="调试case-mt-47" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-48" desc="调试case-mt-48" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test-mt-49" desc="调试case-mt-49" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 8;
+        </sql>
+
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+    </case>
+
+</testcase>

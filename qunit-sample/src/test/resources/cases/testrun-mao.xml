@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase id="testcase-mao1" desc="自动化测试实例-paramcheck-case">
+    <beforeSuit>
+        <set>
+            <abc>1111</abc>
+        </set>
+    </beforeSuit>
+    <case id="case1.1" desc="测试描述1.1" tag="jingchao.mao22">
+            <call service="service-test">
+                <param a="aaa" b="bbb" c="ccc"/>
+            </call>
+            <sql database="dbAssertTest">
+                update table2 set col2 = col2 + 2;
+            </sql>
+             验证特定表
+            <assert>
+                <status>200</status>
+            </assert>
+    </case>
+
+    <case id="case1.2" desc="测试描述1.2" tag="jingchao.mao">
+            <call service="service-test">
+                <param a="222" b="222" c="ccc"/>
+            </call>
+            <assert>
+                <status>201</status>
+            </assert>
+    </case>
+
+    <case id="test1.3" desc="testrun-case1.3" tag="jingchao.mao">
+        <call service="service-test">
+            <param a="222" b="222" c="ccc"/>
+        </call>
+        <assert>
+            <status>200</status>
+        </assert>
+    </case>
+
+</testcase>

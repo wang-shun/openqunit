@@ -1,0 +1,158 @@
+<testcase id="Test_DBAssert" desc="自动化测试实例">
+    <!--
+    assert功能自测case:
+    基本
+    1. 数据库连接正常,可以正确获取数据;并且期望数据表和实际数据表的数据一致,assert成功
+    2. 期望的数据表比实际的少,assert成功
+    3. 期望的数据表比实际的多,assert失败
+    4. 期望的数据表的条目数量比实际的数据表的条目数量多,assert失败
+    5. 期望的数据表的条目数量比实际的数据表的条目数量少,assert失败
+    6. 期望的数据表的某条目的字段比实际的数据表中对应条目的字段少,assert成功
+    7. 期望的数据表的某条目的字段比实际的数据表中对应条目的字段多,assert成功
+    ignore标签
+    1. 设置对表的忽略,可以生效;
+    2. 设置对表的字段的忽略,可以生效;
+    3. 设置对多个表的忽略,可以生效;
+    4. 设置对表的多个字段的忽略,可以生效;
+    5. 设置对于所有表的忽略,assert成功;
+    6. 设置对表的所有字段的忽略,assert成功;
+    7. diff文件中的忽略设置生效;
+    8. diff文件中的多行的忽略设置生效;
+    9. diff文件中的忽略设置和标签里的忽略设置,进行合并后生效;
+    10. diff文件中忽略设置和标签里的忽略设置有部分表重合但字段不重合,进行合并后生效;
+    orderBy标签
+    1. 期望结果顺序和实际结果不一致,加入orderBy标签后,结果一致;
+
+    record功能自测case:
+    1. 可以成功录制DB的数据,并写入指定的文件,文件内容和DB实际数据一致;
+    2. 支持对多个表的录制;
+    3. 待录制的文件不存在,可以自动创建多级父目录和文件;
+    4. 待录制的文件已经存在,删除后重新创建;
+
+    diff功能自测case:
+    文件
+    1. 没有record文件,不进行diff;
+    2. 没有diff文件,可以自动创建多级父目录和文件;
+    3. 有diff文件,删除后重新创建;
+    基本
+    1. 有record文件,且和DB一致,可以得到diff为空的结果
+    2. record文件和DB的某条数据的某个字段不一致,可以得到正确的diff结果
+    3. record文件和DB的多条数据的不同字段不一致,可以得到合并后的diff结果
+    4. record文件和DB的条目数量不一致,记录整个表为diff
+    5. 多个表不一致,在文件中分行记录
+    6. tables为空和不为空时候,diff结果均正常
+    orderBy标签
+    1. 期望结果顺序和实际结果不一致,diff结果为表的全部字段;加入orderBy标签后,diff结果为空
+
+    Mode功能自测case:
+    1. dataMode为generate和assert时,均可以被识别,其他情况识别为unknow
+    2. 只有C形式时,生效
+    3. 只有B,C形式时,B生效
+    4. 只有A,B,C形式时,A生效
+    5. dataModeList在backgrounds和beforeSuit中均可以生效
+    6. dataModeList使用caseId列表或者.*均可以生效
+    7. dataModeList中,某case同时命中"generate"和"assert",则"generate"生效
+
+    使用xml格式保存Ignore.xml文件的自测case:
+    1. 无差异不生成Ignore.xml文件
+    2. 整表的差异,生成Ignore.xml文件
+    3. 表的部分字段差异,生成Ignore.xml文件
+    4. 多个数据表有字段差异,生成Ignore.xml文件
+
+    table参数支持正则匹配自测case:
+    1. table参数为正常的数据表列表参数,不进行正则匹配,直接使用
+    2. table参数含有正则,进行正则匹配,使用正则匹配后的结果
+    3. table参数含有正则,进行正则匹配后无可用数据表,报异常
+    -->
+    <backgrounds>
+        <background>
+            <set>
+                <dataMode></dataMode>
+            </set>
+            <dataHolder tables="" >
+                <!-- 执行对表的更改操作,主动更改col2字段,每次执行均会变化 -->
+                <sql database="dbAssertTest">
+                    update table3 set col2 = col2 + 1;
+                </sql>
+            </dataHolder>
+        </background>
+    </backgrounds>
+
+    <case id="test1.1" desc="调试case1.1" tag="zhy.li">
+        <!-- 控制字段,优先级低于backgrounds里的控制字段 -->
+        <set>
+            <dataMode></dataMode>
+        </set>
+        <dataHolder tables="" >
+            <!-- 执行对表的更改操作,主动更改col2字段,每次执行均会变化 -->
+            <sql database="dbAssertTest">
+                update table3 set col2 = col2 + 1;
+            </sql>
+        </dataHolder>
+
+        <!--<sql database="dbAssertTest">-->
+            <!--update table2 set col3 = col3 + "1";-->
+        <!--</sql>-->
+
+        <!--<prepareData>-->
+            <!--<database>dbAssertTest</database>-->
+            <!--<file>dataset/Test_DBAssert/background0/dataHolder_1-dbAssertTest.xml</file>-->
+        <!--</prepareData>-->
+
+        <!-- 执行对表的更改操作,主动更改col2字段,每次执行均会变化 -->
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 10;
+        </sql>
+        <!-- 验证特定表 -->
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <!--<ignore>table1(id);</ignore>-->
+            <orderBy>dbAssertTest(table2(id))</orderBy>
+            <timeout>1000</timeout>
+        </dbAssert>
+
+        <!--
+        执行对有时间戳字段的表的更新:
+        `updateTime` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        -->
+        <wait time = "2000" />
+        <sql database="dbAssertTest">
+            update tableStamp set col1 = now() where id = (select max(id) from (select * from tableStamp) t);
+        </sql>
+
+        <!-- 使用通配符验证所有多个表:以"table2"开头的表和tableStamp表 -->
+        <dbAssert>
+            <tables>dbAssertTest(table2.*,tableStamp)</tables>
+            <!--<ignore>storage/database/_Test_DBAssert_test1/Ignore_dbAssert_1.xml</ignore>-->
+            <orderBy/>
+        </dbAssert>
+    </case>
+    <case id="test1.2" desc="调试case1.2" tag="zhy.li">
+        <!-- 匹配含有日期的表的形式,且该表内容数据为空 -->
+        <!--
+        <set>
+            <today>DATE(-3,yyyyMMdd)</today>
+            <tableToday>table${today};</tableToday>
+        </set>
+
+        <sql database="dbAssertTest">
+            delete from ${tableToday};
+        </sql>
+        -->
+
+        <dbAssert>
+            <tables>dbAssertTest(table20160819)</tables>
+            <ignore/>
+            <orderBy>dbAssertTest(table2(id))</orderBy>
+        </dbAssert>
+    </case>
+
+    <case id="test1.3" desc="调试case1.3" tag="zhy.li">
+
+        <sql database="dbAssertTest">
+            insert into table4 values(NULL, "yes again", 111, "insert again");
+        </sql>
+
+        <dbAssert/>
+    </case>
+</testcase>

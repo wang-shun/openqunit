@@ -1,0 +1,21 @@
+<services>
+
+    <local id="testdataAssert" class="com.qunar.qunit.testForIgnore" method="changeRespone" desc="测试ignore"/>
+
+    <local id="checkparam" class="com.qunar.qunit.testForIgnore" method="checkparam" desc="测试paramcheck"/>
+
+    <local id="request" class="com.qunar.qunit.testForIgnore" method="request" desc="测试pattern"/>
+
+    <local id="content" class="com.qunar.qunit.sample.service.ExcelService" method="generateExcel"/>
+    <local id="data" class="com.qunar.qunit.sample.service.UserService" method="getData"/>
+    <local id="register" class="com.qunar.qunit.sample.service.UserService" method="register"/>
+    <local id="logon" class="com.qunar.qunit.sample.service.UserService" method="logon"/>
+    <local id="getCount" class="com.qunar.qunit.sample.service.TestParameterService" method="getCount"/>
+    <local id="getString" class="com.qunar.qunit.sample.service.TestParameterService" method="getString"/>
+    <local id="getJson" class="com.qunar.qunit.sample.service.BugFixService" method="getJson"/>
+    <local id="singleParamCtor" class="com.qunar.qunit.sample.service.TestCtorService" method="singleParamCtor"/>
+    <local id="multipleCtor" class="com.qunar.qunit.sample.service.TestCtorService" method="multipleCtor"/>
+    <local id="multipleCtorWithDiffType" class="com.qunar.qunit.sample.service.TestCtorService"
+           method="multipleCtorWithDiffType"/>
+
+</services>

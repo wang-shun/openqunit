@@ -1,0 +1,46 @@
+<testcase id="Test_DBAssertDemo" desc="自动化测试实例Demo">
+
+    <template id="temp1">
+        <set>
+            <myTable>comments</myTable>
+        </set>
+    </template>
+
+    <!-- Demo -->
+    <beforeSuit>
+        <set>
+            <dataMode></dataMode>
+        </set>
+    </beforeSuit>
+
+    <case id="test-Demo" desc="调试case-Demo" tag="zhy.li">
+
+        <prepareData file="runnertest/comment.xml"  database="dbAssertTest"/>
+
+        <dataHolder tables="" clear="true">
+            <sql database="dbAssertTest">
+                update comments set status = -1, auditor = 'zhy.li' where cid = 1;
+            </sql>
+        </dataHolder>
+
+        <!-- 使用sql操作模拟调用接口删除指定id的评论,会更改status=-1,auditor='zhy.li' -->
+        <wait time="2000"/>
+        <sql database="dbAssertTest">
+            update comments set status = -1, auditor = 'zhy.li' where cid = 1;
+        </sql>
+
+        <step ref="temp1"/>
+
+        <!-- 因为变更非依赖上次结果增加,即为确定的,可以直接使用dbAssert标签验证 -->
+        <dbAssert>
+            <tables>dbAssertTest(${myTable},
+                table1)</tables>
+            <ignore/>
+            <orderBy/>
+        </dbAssert>
+
+        <teardown>
+            <prepareData file="runnertest/comment.xml"  database="dbAssertTest"/>
+        </teardown>
+    </case>
+</testcase>

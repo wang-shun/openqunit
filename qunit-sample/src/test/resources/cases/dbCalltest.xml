@@ -1,0 +1,38 @@
+<testcase id="Test_Sample" desc="自动化测试实例">
+    <template id="temp1">
+        <call service="TestSampleService">
+        </call>
+        <print/>
+    </template>
+
+
+<case id="Test_API" desc="自动化测试接口实例" tag="jialin">
+    <set>
+        <param dbCallMode="init"/>
+    </set>
+    <dataHolder id="Test_APIiii" tables="payserver(orderinfo_DATE(0,yyyy_MM),orderinfoext_DATE(0,yyyy_MM),batch_order_DATE(0,yyyy_MM),batch_extinfo_DATE(0,yyyy_MM));platform(userpwd)" clear ="true">
+       <!-- <step ref="temp1"/>-->
+      <!--  <reload/>-->
+      <!--<call service="TestSampleService"/>-->
+    </dataHolder>
+    <!--<print/>
+    <sql database="platform">
+        update userpwd set createTime = now() where id = 20;
+    </sql>
+    <print/>
+    <dbAssert/>-->
+<!--    <dataAssert>
+        <ignore>body.time2</ignore>
+    </dataAssert>-->
+<!--    <assert>
+            <![CDATA[
+                {"id":"true"}
+          ]]>
+    </assert>-->
+</case>
+<!--<case id="222" desc="自动化测试接口实例" tag="jialin2">
+        <dataholder id="222iii" tables="platform(userpwd,certification_apply_order);accounting(activity_credit_quota)"  dataHolderMode="init">
+            <call service="TestSampleService"/>
+        </dataholder>
+</case>-->
+</testcase>

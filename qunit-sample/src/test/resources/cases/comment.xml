@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <comments id="1" cid="1" obj_seq="beijing_city_6920" obj_name="锦江之星北京前门店" customer="xswh2877" auditor="系统自动审核"
+              ip="997020530" status="3" cretime="2014-10-31 12:00:00" type="1" rid="0" pid="0" ext1="0" ext2="qunar"
+              ext3="" ext4="" modtime="2014-06-10 16:15:59" appid="1" cityurl="beijing_city"
+              audittime="2014-04-20 11:59:48" contenttype="3" synctime="2012-09-25 15:05:05" parent_fid="0" ext5="1"
+              ext6="CHEAT" title="" suspect_mark="0" version="2015-06-30 15:31:00" origin_type="0" reexamine="0"
+              reexamine_auditor="" reexamine_config="0" regip="3232239755" reexamine_time="2015-06-30 15:31:00"/>
+
+    <comments id="2" cid="2" obj_seq="fuzhou_fujian_31" obj_name="福州台湾饭店" customer="xswh2877"
+              auditor="vicky.han@qunarman"
+              ip="3663008308" status="3" cretime="2014-10-31 12:00:00" type="1" rid="0" pid="0" ext1="0" ext2="qunar"
+              ext3="电话" ext4="avg" modtime="2012-07-02 19:42:41" appid="1" cityurl="fuzhou_fujian"
+              audittime="2015-07-02 23:20:44" contenttype="3" synctime="2012-09-25 15:12:54" parent_fid="0" ext5="1"
+              ext6="CHEAT" title="" suspect_mark="0" version="2015-07-02 23:20:44" origin_type="0" reexamine="0"
+              reexamine_auditor="" reexamine_config="0" regip="0" reexamine_time="1970-01-01 12:00:00"/>
+</dataset>

@@ -1,0 +1,25 @@
+<testcase id="Test_dataTest" desc="测试数据驱动的case">
+    <data-case id="datadriven-1" desc="数据驱动的testcase测试-使用纯文本格式的数据" tag="1111-shuju">
+        <set>
+            <param  data="DATE(0, yyyyMMddHHmmssSS)"
+                    time="timeDATE(0, yyyyMMddHHmmssSS)"/>
+        </set>
+        <call service="testdataAssert">
+            <param  data="${data}"
+                    time="${time}"
+                    amount="0"/>
+        </call>
+        <dataAssert/>
+        <data>
+            |amount|
+            |1|
+            |2|
+        </data>
+    </data-case>
+    <case id="test" desc="test" tag="jialin-test">
+        <call service="TestSampleService">
+
+        </call>
+        <dataAssert/>
+    </case>
+</testcase>

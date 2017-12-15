@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase id="testcaseID" desc="【交易接口】记录第三方支付账号接口测试">
+    <set>
+        <param name="dataMode">generate</param>
+    </set>
+    <case id="caseId" desc="记录第三方支付账号-正常参数Type=MOBILE" tag="dx">
+        <call service="service-test" >
+
+        </call>
+            <dataAssert  dataMode="${dataMode}" ignore="ret,errmsg">
+
+            </dataAssert>
+
+        <print/>
+    </case>
+    </testcase>

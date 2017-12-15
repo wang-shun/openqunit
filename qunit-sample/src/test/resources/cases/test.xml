@@ -1,0 +1,10 @@
+<!--<testcase id="Test_Sample" desc="自动化测试实例">-->
+<!--<case id="Test_API" desc="自动化测试接口实例" tag="jialin">-->
+
+    <!--<dbcall id="iii" tables="platform(userpwd)"  record="${record}" file="record">-->
+        <!--<reload/>-->
+
+        <!--<call service="TestSampleService"/>-->
+    <!--</dbcall>-->
+<!--</case>-->
+<!--</testcase>-->

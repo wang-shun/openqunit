@@ -1,0 +1,29 @@
+<testcase id="testDBAssert-paramUpdate" desc="自动化测试实例-参数更新测试">
+
+
+    <case id="test1.1" desc="参数更新测试case1.1" tag="zhy.li">
+
+        <set>
+            <addNum>3</addNum>
+        </set>
+
+        <set>
+            <date>DATE(0, yyyy-MM-dd HH:mm:ss)</date>
+        </set>
+
+        <dsl4paramUpdate>
+            <input>${date}</input>
+        </dsl4paramUpdate>
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + ${addNum};
+        </sql>
+        <!-- 验证特定表 -->
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <!--<ignore>table1(id);</ignore>-->
+            <orderBy>dbAssertTest(table2(id))</orderBy>
+        </dbAssert>
+    </case>
+
+</testcase>

@@ -1,0 +1,94 @@
+<testcase id="Test_DataAssert-中文test" desc="自动化测试实例">
+
+    <backgrounds>
+        <background>
+            <set>
+                <tryVar>hhhh</tryVar>
+            </set>
+        </background>
+        <background>
+            <set>
+                <tryVar2>hhhh2222</tryVar2>
+            </set>
+
+
+        </background>
+    </backgrounds>
+
+    <beforeSuit>
+        <set>
+            <dataMode></dataMode>
+        </set>
+    </beforeSuit>
+
+    <afterSuit>
+        <set>
+            <tryVar3>hhhh3333</tryVar3>
+        </set>
+    </afterSuit>
+
+    <beforeCase>
+        <set>
+            <tryVar4>hhhh4444</tryVar4>
+        </set>
+    </beforeCase>
+
+    <afterSuit>
+        <set>
+            <tryVar5>hhhh5555</tryVar5>
+        </set>
+    </afterSuit>
+
+    <afterCase>
+        <set>
+            <tryVar55>hhhh5555hhhh</tryVar55>
+        </set>
+    </afterCase>
+
+    <case id="test1-测试中文" desc="调试case1" tag="zhy.li">
+
+        <set>
+            <date>DATE(0, yyyy-MM-dd HH:mm:ss)</date>
+        </set>
+        <!-- 执行对表的更改操作,主动更改col2字段,每次执行均会变化 -->
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + 1;
+        </sql>
+        <sql database="dbAssertTest">
+            select * from table2;
+        </sql>
+        <sql database="dbAssertTest">
+            select 111 , "${date}" as Date from table2;
+        </sql>
+
+        <dataAssert>
+            <ignore/>
+        </dataAssert>
+
+    </case>
+
+    <case id="test2" desc="hhhh22222222222" tag="zhy.li">
+        <set>
+            <var6>hhhhh6666</var6>
+        </set>
+    </case>
+
+    <case id="test3" desc="hhhh33333333333" tag="zhy.li">
+        <set>
+            <var7>hhhhh7777</var7>
+        </set>
+    </case>
+    <case id="test4" desc="hhhh" tag="jialin1">
+        <call service="testdataAssert"></call>
+        <dataAssert>
+            <ignore></ignore>
+        </dataAssert>
+    </case>
+
+    <case id="test5" desc="hhhh" tag="jialin">
+        <call service="testdataAssert"></call>
+        <dataAssert>
+            <ignore>runnertest/ignore.xml</ignore>
+        </dataAssert>
+    </case>
+</testcase>

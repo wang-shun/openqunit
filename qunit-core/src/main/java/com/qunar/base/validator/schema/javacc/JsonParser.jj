@@ -1,0 +1,325 @@
+/**
+ * Adapted from the Json parser grammar from http://code.google.com/p/jsonparser/
+ *
+ * Author: Inderjeet Singh
+ */
+
+options {
+  STATIC = false;
+  UNICODE_INPUT = true;
+}
+
+PARSER_BEGIN(JsonParserJavacc)
+
+package com.qunar.base.validator.schema.javacc;
+
+import java.io.EOFException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.qunar.base.validator.schema.Any;
+import com.qunar.base.validator.schema.ArrayRuleSchema;
+import com.qunar.base.validator.schema.Attr;
+import com.qunar.base.validator.schema.ObjectRuleSchema;
+import com.qunar.base.validator.schema.PureValueSchema;
+import com.qunar.base.validator.schema.Schema;
+import com.qunar.base.validator.util.StringUnmarshaller;
+
+@SuppressWarnings("all")
+public final class JsonParserJavacc {
+
+}
+
+PARSER_END(JsonParserJavacc)
+
+SKIP : { " " | "\t" | "\n" | "\r" }
+/*
+ * Technically Json does not allow leading zeros in numbers, but we
+ * will allow that.
+ */
+TOKEN : {
+  <EXPONENT : ("e"|"E")["+","-","0"-"9"](["0"-"9"])*>
+  | <DIGITS : (["0"-"9"])+>
+  | <NULL : "null">  
+  | <NAN : "NaN">
+  | <INFINITY : "Infinity">
+  | <BOOLEAN : ("true" | "false")>
+  | <IDENTIFIER_SANS_EXPONENT : ["a"-"d","f"-"z","A"-"D","F"-"Z", "_"] (["a"-"z","A"-"Z","0"-"9","_"])* >
+  | <IDENTIFIER_STARTS_WITH_EXPONENT : ["e","E"] (["a"-"z","A"-"Z","0"-"9","_"])* >
+  | <#HEX_CHAR : ["a"-"f","A"-"F","0"-"9"]>
+  | <UNICODE_CHAR : "\\u" <HEX_CHAR><HEX_CHAR><HEX_CHAR><HEX_CHAR> >
+  | <#ESCAPE_CHAR: "\\" ["n","t","b","r","f","\\","'","\"", "/"] >
+  | <SINGLE_QUOTE_LITERAL: "\'" ( (~["\'","\\","\n","\r"]) | <ESCAPE_CHAR> | <UNICODE_CHAR>)* "\'" >
+  | <DOUBLE_QUOTE_LITERAL: "\"" ( (~["\"","\\","\n","\r"]) | <ESCAPE_CHAR> | <UNICODE_CHAR>)* "\"" >
+  | <QUOTE : "\""> : STRING_STATE
+}
+<STRING_STATE> MORE  : { "\\" : ESC_STATE }
+<STRING_STATE> TOKEN : {
+  <ENDQUOTE : <QUOTE> > : DEFAULT
+| <CHAR : ~["\"","\\"]>
+}
+<ESC_STATE> TOKEN : {
+  <CNTRL_ESC : ["\"","\\","/","b","f","n","r","t"]> : STRING_STATE
+}
+<ESC_STATE> MORE  : { "u" : HEX_STATE }
+<HEX_STATE>  TOKEN : {
+  <#HEX : ["a"-"f","A"-"F","0"-"9"]>
+| <HEX_ESC : <HEX><HEX><HEX><HEX> > : STRING_STATE
+}
+
+public Schema<Object> parse() :
+{
+  Schema<Object> json = null;
+  Object o = null;
+}
+{
+  (<EOF>){
+    throw new RuntimeException(new EOFException());
+  } |
+  [")]}'\n"](
+    json=onlyAttrValue()|
+    json=JsonObject() |
+    json=JsonArray() |
+    json=pureValue())
+  { return json; }
+}
+
+private Schema JsonObject() :
+{
+  ObjectRuleSchema o = new ObjectRuleSchema();
+  Attr attr = null;
+  List<Attr> attrList = new ArrayList<Attr>();
+}
+{
+  "{" [ Members(o) ] "}"(":"attr=attr(){attrList.add(attr);})*
+  {
+    o.setAttrRule(attrList);
+    return o;
+  }
+}
+
+Attr attr():{
+  String name=null;
+  List arg=null;
+}
+{
+    (name=JsonMemberName()(arg=arguments())? {return new Attr(name,arg);})   
+}
+
+List<Object> arguments():{
+  List<Object> list = new ArrayList<Object>();
+  Object obj;
+}
+{
+  "("(obj = argument(){ list.add(obj);})?(","obj = argument(){ list.add(obj);})*")"{
+    return list;
+   }
+}
+
+private Object argument():
+{Object o = null;}
+{
+  ( o=JsonString()|
+    o=JsonNumber()|
+    o=JsonBoolean()|
+    o=JsonNull())
+  { return  o; }
+}
+
+private Object JsonNull() :
+{
+  Token t;
+}
+{
+  t = <NULL> { return null; }
+}
+
+private void Members(ObjectRuleSchema o) :
+{ }
+{
+  Pair(o) [ "," Members(o) ]
+}
+
+private void Pair(ObjectRuleSchema o) :
+{
+  String property;
+  Schema value = new PureValueSchema(new Any());
+}
+{
+  property=JsonMemberName() ":" value=JsonValue()
+  {
+    o.addSchema(property, value);
+  }
+}
+
+private String JsonMemberName() : 
+{ Token t; String value; }
+{
+  t= Identifier() { return  String.valueOf(t.image); } |
+  value=JsonString() { return value; }
+}
+
+private Schema JsonArray() :
+{
+  Attr attr = null;
+  List<Attr> attrList = new ArrayList<Attr>();
+  ArrayRuleSchema array = new ArrayRuleSchema();
+}
+{
+  "[" [ Elements(array) ] "]"(":"attr=attr(){attrList.add(attr);})*
+  {
+    array.setAttrRule(attrList);
+    return array;
+  }
+}
+
+private void Elements(ArrayRuleSchema array) :
+{
+  Schema element;
+}
+{
+  element=JsonValue(){ array.addSchema(element); } [ "," Elements(array) ]
+}
+
+private Schema JsonValue() :
+{ Schema schema = null; }
+{
+(
+  schema=pureValue()|
+  schema=JsonObject()|
+  schema=JsonArray())
+  { return schema; }
+}
+
+private PureValueSchema onlyAttrValue():
+{
+  Attr attr = null;
+  List<Attr> attrList = new ArrayList<Attr>();
+}
+{
+  (":"attr=attr(){attrList.add(attr);})+
+  {
+    PureValueSchema schema = new PureValueSchema(new Any());
+    schema.setAttrRule(attrList);
+    return schema;
+  }
+}
+
+private PureValueSchema pureValue():{
+  Attr attr = null;
+  Attr attr1 = null;
+  List<Attr> attrList = new ArrayList<Attr>();
+  Object o = null;
+}
+{
+  ( o=JsonString()|
+    o=JsonNumber()|
+    o=JsonBoolean()|
+    attr1=attr()|
+    o=JsonNull())(":"attr=attr(){attrList.add(attr);})*
+  {
+    if(attr1!=null)    {      o=new Any();
+    attrList.add(0,attr1);  }    PureValueSchema schema = new PureValueSchema(o);
+    schema.setAttrRule(attrList);
+    return schema;
+  }}
+
+private boolean JsonBoolean() :
+{ Token t; }
+{
+  t=<BOOLEAN> {
+    return Boolean.valueOf(t.image);
+  }
+}
+
+private Object JsonPrimitive() :
+{
+  Object value;
+}
+{
+  ( value=JsonString()) { return value; } |
+  ( value=JsonNumber()) { return value; } |
+  ( value=JsonBoolean()) { return value; } 
+}
+
+private Number JsonNumber() :
+{
+  String intpart = null,
+         fracpart = null,
+         exppart = null;
+  Number value;
+}
+{
+  LOOKAHEAD(2)
+  (value=JsonSpecialNumbers()) {return value; } |		 
+  (intpart=JsonInt() [ fracpart=JsonFrac() ] [ exppart=JsonExp() ])
+  {
+    Number n;
+    if (exppart != null || fracpart != null) {
+      fracpart = (fracpart == null) ? "" : fracpart;
+      exppart = (exppart == null) ? "" : exppart;
+      n = new java.math.BigDecimal(intpart + fracpart + exppart);
+    } else {
+      n = new java.math.BigDecimal(intpart);
+    }
+    return n;
+  }
+}
+
+private Number JsonSpecialNumbers() : 
+{
+  boolean negative = false;		 
+}		 
+{		 
+  (<NAN>) {return Double.NaN; } |
+  (["-" {negative = true;}]<INFINITY>) {return negative ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY; }
+}
+
+private String JsonInt() :
+{
+  String digits;
+  boolean negative = false;
+}
+{
+  ["-" { negative = true; } ] digits=Digits()
+  {
+    if(negative)
+      return "-" + digits;
+    return digits;
+  }
+}
+
+private String JsonFrac() :
+{ String digits; }
+{
+  "." digits=Digits()
+  { return "." + digits; }
+}
+
+private String JsonExp() :
+{ Token t; }
+{
+  t = <EXPONENT> {return t.image;} 
+} 
+
+private Token Identifier() :
+{ Token t; }
+{
+  (t = <IDENTIFIER_STARTS_WITH_EXPONENT> | t = <IDENTIFIER_SANS_EXPONENT>) {return t;} 
+} 
+
+private String Digits() :
+{ Token t; }
+{
+  t=<DIGITS>
+  { return t.image; }
+}
+
+private String JsonString() :
+{ Token t; }
+{
+  (t=<SINGLE_QUOTE_LITERAL> | t=<DOUBLE_QUOTE_LITERAL>) { 
+    String value = StringUnmarshaller.unmarshall(t.image);    
+    return value; 
+  }
+}

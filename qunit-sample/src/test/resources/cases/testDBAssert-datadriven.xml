@@ -1,0 +1,27 @@
+<testcase id="testDBAssert-datadriven" desc="自动化测试实例-数据驱动case">
+
+
+    <data-case id="test1.1" desc="数据驱动case1.1" tag="zhy.li">
+
+        <set>
+            <date>DATE(0, yyyy-MM-dd HH:mm:ss)</date>
+        </set>
+
+        <sql database="dbAssertTest">
+            update table2 set col2 = col2 + ${addNum};
+        </sql>
+        <!-- 验证特定表 -->
+        <dbAssert>
+            <tables>dbAssertTest(table2)</tables>
+            <!--<ignore>table1(id);</ignore>-->
+            <orderBy>dbAssertTest(table2(id))</orderBy>
+        </dbAssert>
+
+        <data>
+            |addNum|
+            |1|
+            |2|
+        </data>
+    </data-case>
+
+</testcase>
